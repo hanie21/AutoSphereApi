@@ -1,35 +1,46 @@
 using OpenSearch.Net;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 
 namespace AutoSphere.Api.Repositories
 {
     public class VehicleSearchRepository : IVehicleSearchRepository
     {
         private readonly OpenSearchLowLevelClient _client;
+        private readonly ILogger<VehicleSearchRepository> _logger;
 
-        public VehicleSearchRepository(OpenSearchLowLevelClient client)
+        public VehicleSearchRepository(OpenSearchLowLevelClient client, ILogger<VehicleSearchRepository> logger)
         {
             _client = client;
+            _logger = logger;
         }
 
         public async Task<string> IndexVehicleAsync(string indexName, object vehicle)
         {
+            // Perform the indexing operation
             var response = await _client.IndexAsync<StringResponse>(indexName, PostData.Serializable(vehicle));
-            
+
+            // Check if the indexing operation was successful
             if (!response.Success)
             {
-                // Log the detailed error for debugging
-                Console.WriteLine($"Failed to index vehicle: {response.Body}");
+                // Log the error using Serilog for debugging
+                _logger.LogError("Failed to index vehicle. Response: {ResponseBody}", response.Body);
+
+                // The error handling middleware will take care of logging and response management
                 throw new Exception($"Failed to index vehicle: {response.Body}");
             }
 
-            // Parse and return the ID of the indexed document
+            // Parse the response to extract the document ID
             var responseObject = JsonSerializer.Deserialize<Dictionary<string, object>>(response.Body);
             if (responseObject != null && responseObject.TryGetValue("_id", out var id))
             {
                 return id.ToString();
             }
 
+            // Log the error if document ID could not be retrieved
+            _logger.LogError("Indexing succeeded, but document ID could not be retrieved from the response.");
+            
+            // Error handling middleware will log and manage the exception
             throw new Exception("Indexing succeeded, but document ID could not be retrieved.");
         }
 

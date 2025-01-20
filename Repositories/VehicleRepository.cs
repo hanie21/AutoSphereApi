@@ -1,5 +1,4 @@
-﻿using System;
-using AutoSphere.Api.Data;
+﻿using AutoSphere.Api.Data;
 using AutoSphere.Api.Model;
 using Microsoft.EntityFrameworkCore;
 

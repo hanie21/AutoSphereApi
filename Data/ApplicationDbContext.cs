@@ -1,5 +1,4 @@
-﻿using System;
-using AutoSphere.Api.Model;
+﻿using AutoSphere.Api.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace AutoSphere.Api.Data
@@ -7,9 +6,7 @@ namespace AutoSphere.Api.Data
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-    : base(options)
-        {
-        }
+                                    : base(options){}
 
         protected ApplicationDbContext() { }
 

@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using AutoSphere.Api.Model;
-using Microsoft.AspNetCore.Mvc;
+﻿using AutoSphere.Api.Model;
 
 
 namespace AutoSphere.Api.Repositories

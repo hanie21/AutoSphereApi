@@ -13,11 +13,13 @@ namespace AutoSphere.Api.Tests
     {
         private readonly Mock<OpenSearchLowLevelClient> _mockClient;
         private readonly VehicleSearchRepository _repository;
+         private readonly Mock<ILogger<VehicleSearchRepository>> _mockLogger;
 
         public VehicleSearchRepositoryTests()
         {
             _mockClient = new Mock<OpenSearchLowLevelClient>();
-            _repository = new VehicleSearchRepository(_mockClient.Object);
+            _mockLogger = new Mock<ILogger<VehicleSearchRepository>>();
+            _repository = new VehicleSearchRepository(_mockClient.Object, _mockLogger.Object);
         }
 
         [Fact]
