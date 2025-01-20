@@ -1,0 +1,40 @@
+# .NET Core
+bin/
+obj/
+.vs/
+.vscode/
+# User-specific files
+.idea/
+# Ignore config files
+appsettings.json
+appsettings.Development.json
+# Ignore secrets and sensitive data
+secrets.json
+*.key
+*.pem
+# Ignore build artifacts
+/build/
+/publish/
+# Ignore test output directories
+/testresults/
+/nunit3/
+# Ignore logs
+logs/
+*.log
+# Ignore npm / yarn / frontend
+node_modules/
+# Ignore IDE settings
+.idea/
+.vscode/
+# Ignore Windows Installer files
+*.cab
+*.msi
+*.exe
+# Ignore Windows file system thumbs.db
+Thumbs.db
+# Ignore temporary files created by IDEs like Rider, Visual Studio
+.vsconfig
+# Ignore dotnet user secrets
+dotnet-user-secrets/
+# Ignore global.json if it's not required
+global.json
