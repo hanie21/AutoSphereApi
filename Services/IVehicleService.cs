@@ -1,6 +1,4 @@
-﻿using System;
-using AutoSphere.Api.Model;
-using System.Threading.Tasks;
+﻿using AutoSphere.Api.Model;
 
 namespace AutoSphere.Api.Services
 {

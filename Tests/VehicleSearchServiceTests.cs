@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using AutoSphere.Api.Repositories;
 using AutoSphere.Api.Services;
 using Moq;

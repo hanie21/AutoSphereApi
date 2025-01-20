@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Threading.Tasks;
 using AutoSphere.Api.Repositories;
 using Moq;
 using OpenSearch.Net;

@@ -1,4 +1,3 @@
-using AutoSphere.Api.Model;
 
 namespace AutoSphere.Api.Services
 {

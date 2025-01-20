@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoSphere.Api.Data;
 using AutoSphere.Api.Model;
 using AutoSphere.Api.Repositories;

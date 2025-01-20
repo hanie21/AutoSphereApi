@@ -1,5 +1,4 @@
-﻿using System;
-using AutoSphere.Api.Model;
+﻿using AutoSphere.Api.Model;
 using AutoSphere.Api.Repositories;
 
 namespace AutoSphere.Api.Services

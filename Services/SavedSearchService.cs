@@ -1,4 +1,3 @@
-using System.Text;
 using AutoSphere.Api.Model;
 using System.Text.Json;
 using AutoSphere.Api.Repositories;
