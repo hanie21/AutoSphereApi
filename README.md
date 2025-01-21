@@ -2,7 +2,11 @@
 # AutoSphere API
 
 ## Description
-AutoSphere API is a .NET Core RESTful Web API designed to handle vehicle-related data with PostgreSQL as the database. This API allows operations like adding, searching, and saving vehicle data. It also integrates with a search engine (e.g., OpenSearch) for advanced searching capabilities.
+AutoSphere API is a .NET Core RESTful Web API designed to handle vehicle-related data with PostgreSQL as the database. This API allows operations like adding, searching, and saving vehicle data. It also integrates with a search engine (e.g., OpenSearch) for advanced searching capabilities, including fuzzy matching for better search results.
+
+The API supports both basic and advanced searching:
+- **Basic Searching**: Allows filtering vehicles by parameters like make, model, price, mileage, etc.
+- **Advanced Searching**: Includes advanced filtering and fuzzy matching for more accurate results when dealing with misspelled or similar search terms.
 
 ## Technologies Used
 
@@ -10,7 +14,7 @@ AutoSphere API is a .NET Core RESTful Web API designed to handle vehicle-related
 - **Database**: PostgreSQL
 - **Search Engine**: OpenSearch (for indexing and searching vehicles)
 - **Caching**: MemoryCache (with future Redis integration)
-- **Authentication**: JWT (JSON Web Tokens)
+- **Authentication**: JWT (JSON Web Tokens) for authentication (to be added in future)
 - **Logging**: Serilog (for structured logging)
 - **Testing**: xUnit, Moq (for unit and integration tests)
 - **Middleware**: Custom error handling middleware for centralized exception management
