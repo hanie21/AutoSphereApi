@@ -71,5 +71,33 @@ namespace AutoSphere.Api.Repositories
                 throw new Exception($"Failed to delete vehicle: {response.Body}");
             }
         }
+    
+        public async Task<string> SearchVehiclesWithFuzzyMatchingAsync(string indexName, string query)
+        {
+            var fuzzyQuery = new
+            {
+                query = new
+                {
+                    fuzzy = new
+                    {
+                        make = new
+                        {
+                            value = query,
+                            fuzziness = "AUTO"  // Automatic fuzziness based on the length of the term
+                        }
+                    }
+                }
+            };
+
+            var response = await _client.SearchAsync<StringResponse>(indexName, PostData.Serializable(fuzzyQuery));
+
+            if (!response.Success)
+            {
+                throw new Exception($"Search failed: {response.Body}");
+            }
+
+            return response.Body;
+        }
+    
     }
 }

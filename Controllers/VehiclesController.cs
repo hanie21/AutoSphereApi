@@ -128,6 +128,13 @@ namespace AutoSphere.Api.Controllers
 
             return Ok("Logged successfully.");
         }
+
+        [HttpGet("fuzzy-search")]
+        public async Task<IActionResult> FuzzySearch(string query)
+        {
+            var results = await _vehicleSearchService.FuzzyMatchingSearchVehicleAsync("vehicles", query);
+            return Ok(results);
+        }
     }
 }
 

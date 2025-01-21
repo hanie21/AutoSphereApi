@@ -180,5 +180,32 @@ namespace AutoSphere.Api.Tests
             var exception = await Assert.ThrowsAsync<Exception>(() => _repository.DeleteVehicleAsync(indexName, vehicleId));
             Assert.Contains("Failed to delete vehicle", exception.Message);
         }
+    
+        [Fact]
+        public async Task SearchVehiclesWithFuzzyMatchingAsync_ShouldReturnCorrectResponse_WhenSuccessful()
+        {
+            // Arrange
+            var indexName = "vehicles";
+            var query = "Toyta"; // Misspelled term
+            var expectedResponse = "{\"hits\": {\"total\": 1, \"hits\": [{\"_source\": {\"make\": \"Toyota\"}}]}}"; // Simulated response
+
+            var mockResponse = new Mock<StringResponse>(expectedResponse, 200, null);
+
+            // Setup the mock to return the expected response
+            _mockClient
+            .Setup(client => client.SearchAsync<StringResponse>(
+                It.Is<string>(i => i == indexName),    
+                It.Is<PostData>(d => d != null),            
+                It.IsAny<SearchRequestParameters>(),          
+                default(CancellationToken)                  
+            ))
+            .ReturnsAsync(mockResponse.Object);
+
+            // Act
+            var result = await _repository.SearchVehiclesWithFuzzyMatchingAsync(indexName, query);
+
+            // Assert
+            Assert.Contains("Toyota", result);  // Assert that the result contains the expected response
+        }
     }
 }

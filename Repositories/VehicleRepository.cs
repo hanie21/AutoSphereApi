@@ -19,9 +19,9 @@ namespace AutoSphere.Api.Repositories
 
            // Basic filters
             if (!string.IsNullOrEmpty(request.Make))
-                query = query.Where(v => v.Make.Contains(request.Make));
+                query = query.Where(v => v.Make.ToLower().Contains(request.Make.ToLower()));
             if (!string.IsNullOrEmpty(request.Model))
-                query = query.Where(v => v.Model.Contains(request.Model));
+                query = query.Where(v => v.Model.ToLower().Contains(request.Model.ToLower()));
             if (request.MinYear.HasValue)
                 query = query.Where(v => v.Year >= request.MinYear.Value);
             if (request.MaxYear.HasValue)
@@ -37,7 +37,7 @@ namespace AutoSphere.Api.Repositories
 
             // Advanced filters
             if (!string.IsNullOrEmpty(request.Condition))
-                query = query.Where(v => v.Condition == request.Condition);
+                query = query.Where(v => v.Condition.ToLower() == request.Condition.ToLower());
             if (request.ExcludeAccidentHistory.HasValue && request.ExcludeAccidentHistory.Value)
                 query = query.Where(v => !v.HasAccidentHistory);
             if (request.MaxOwners.HasValue)
@@ -54,11 +54,11 @@ namespace AutoSphere.Api.Repositories
             }
 
             if (!string.IsNullOrEmpty(request.ExteriorColor))
-                query = query.Where(v => v.ExteriorColor == request.ExteriorColor);
+                query = query.Where(v => v.ExteriorColor.ToLower() == request.ExteriorColor.ToLower());
             if (!string.IsNullOrEmpty(request.InteriorColor))
-                query = query.Where(v => v.InteriorColor == request.InteriorColor);
+                query = query.Where(v => v.InteriorColor.ToLower() == request.InteriorColor.ToLower());
             if (!string.IsNullOrEmpty(request.EngineType))
-                query = query.Where(v => v.EngineType == request.EngineType);
+                query = query.Where(v => v.EngineType.ToLower() == request.EngineType.ToLower());
 
             // Advanced filters (not repeated here for brevity)
 

@@ -15,7 +15,6 @@ namespace AutoSphere.Api.Services
 
         public async Task<string>  IndexVehicleAsync(string indexName, object vehicle)
         {
-            Console.WriteLine(JsonSerializer.Serialize(vehicle));
             return await _repository.IndexVehicleAsync(indexName, vehicle);
         }
 
@@ -27,6 +26,11 @@ namespace AutoSphere.Api.Services
         public async Task DeleteVehicleAsync(string indexName, string vehicleId)
         {
             await _repository.DeleteVehicleAsync(indexName, vehicleId);
+        }
+
+        public async Task<string> FuzzyMatchingSearchVehicleAsync(string indexName, string query)
+        {
+            return await _repository.SearchVehiclesWithFuzzyMatchingAsync(indexName, query);
         }
     }
 }

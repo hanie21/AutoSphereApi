@@ -21,7 +21,7 @@ namespace AutoSphere.Api.Tests.Controllers
         public VehiclesControllerTests()
         {
             _cache = new Mock<IMemoryCache>();
-             _mockLogger = new Mock<ILogger<VehiclesController>>();
+            _mockLogger = new Mock<ILogger<VehiclesController>>();
             _mockVehicleService = new Mock<IVehicleService>();
             _mockSavedSearchService = new Mock<ISavedSearchService>();
             _mockVehicleSearchService = new Mock<IVehicleSearchService>();

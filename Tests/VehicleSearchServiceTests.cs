@@ -9,13 +9,11 @@ namespace AutoSphere.Api.Tests.Services
     {
         private readonly Mock<IVehicleSearchRepository> _mockRepository;
         private readonly VehicleSearchService _service;
-         private readonly Mock<ILogger<VehicleSearchService>> _mockLogger;
 
         public VehicleSearchServiceTests()
         {
             _mockRepository = new Mock<IVehicleSearchRepository>();
             _service = new VehicleSearchService(_mockRepository.Object);
-            _mockLogger = new Mock<ILogger<VehicleSearchService>>();
         }
 
         [Fact]
