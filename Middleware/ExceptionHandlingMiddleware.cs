@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -30,14 +32,37 @@ namespace AutoSphere.Api.Middleware
 
         private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            // Log the exception if needed (e.g., using a logger)
-            // Example: _logger.LogError(exception, "An unhandled exception occurred.");
+            int statusCode;
+            string message;
 
+            if (exception is UnauthorizedAccessException)
+            {
+                statusCode = StatusCodes.Status401Unauthorized;
+                message = "Unauthorized access. Please check your credentials.";
+            }
+            else if (exception is KeyNotFoundException)
+            {
+                statusCode = StatusCodes.Status404NotFound;
+                message = "The requested resource was not found.";
+            }
+            else if (exception is ArgumentException || exception is ArgumentNullException)
+            {
+                statusCode = StatusCodes.Status400BadRequest;
+                message = "Invalid request. Please check the input.";
+            }
+            else
+            {
+                // Default to 500 Internal Server Error for unhandled exceptions
+                statusCode = StatusCodes.Status500InternalServerError;
+                message = "An internal server error occurred.";
+            }
+
+            // Create the response object
             var response = new
             {
-                Message = "An internal server error occurred.",
-                Detail = exception.Message, // You can hide this in production
-                StatusCode = (int)HttpStatusCode.InternalServerError
+                Message = message,
+                Detail = exception.Message,
+                StatusCode = statusCode
             };
 
             context.Response.ContentType = "application/json";

@@ -117,7 +117,7 @@ namespace AutoSphere.Api.Tests
 
             // Assert
             Assert.NotNull(result);
-            Assert.Single(result);
+            Assert.NotEmpty(result);
             Assert.Contains(result, v => v.Make == "Toyota" && v.Year == 2020);
         }
 

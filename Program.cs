@@ -28,26 +28,26 @@ builder.Services.AddSwaggerGen();
 
 // Add OpenSearch client
 var openSearchEndpoint = builder.Configuration["OpenSearch:Endpoint"];
-var openSearchSettings = new OpenSearch.Net.ConnectionConfiguration(new Uri(openSearchEndpoint))
+var openSearchSettings = new ConnectionConfiguration(new Uri(openSearchEndpoint))
     .BasicAuthentication(
         builder.Configuration["OpenSearch:Username"],
         builder.Configuration["OpenSearch:Password"]
     );
-
 var openSearchClient = new OpenSearchLowLevelClient(openSearchSettings);
 builder.Services.AddSingleton<OpenSearchLowLevelClient>(openSearchClient);
+
+//Add Services and Repositories
 builder.Services.AddScoped<IVehicleSearchRepository, VehicleSearchRepository>();
 builder.Services.AddScoped<IVehicleSearchService, VehicleSearchService>();
-
-
 builder.Services.AddScoped<ISavedSearchRepository, SavedSearchRepository>();
 builder.Services.AddScoped<ISavedSearchService, SavedSearchService>();
+builder.Services.AddScoped<IVehicleService, VehicleService>();
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 
 
 builder.Services.AddControllers();
 
-builder.Services.AddScoped<IVehicleService, VehicleService>();
-builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
+
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
